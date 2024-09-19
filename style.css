@@ -1,0 +1,126 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0E5B51;
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+    color: white;
+}
+
+header {
+
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #8B8F8B;
+    border: 2px solid;
+}
+
+.Harry-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.search {
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 50px;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    color: black;
+}
+
+.search:focus {
+    outline: 0;
+}
+
+.search::placeholder {
+    color: black;
+}
+
+/* Main container setup */
+main {
+    margin-top: 20px; /* Adds space above the main section */
+    padding: 20px; /* Adds space inside the main section */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    background-color: transparent;
+}
+
+/* Container for both front and back sides of the card */
+.character-container {
+    position: relative;
+    width: 300px;
+  height: 400px; /* Adjusted to ensure image fits nicely */
+    perspective: 1000px;
+    margin: 1rem;
+}
+.character img {
+    width: 100%;
+    height: 95%; /* Takes up 80% of the container height */
+    object-fit: cover; /* Ensures the image scales correctly */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Card content */
+.character {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 1s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+}
+
+/* Front side of the card */
+.front {
+    background-color: #8B8F8B;
+    z-index: 2; /* Front is on top initially */
+      border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Back side of the card */
+.back {
+    background-color: #0E5B51;
+      border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: rotateY(180deg); /* Back is hidden until flipped */
+    z-index: 1; /* Back is behind the front */
+}
+
+/* Flip effect */
+.character-container:hover .front {
+    transform: rotateY(180deg);
+}
+
+.character-container:hover .back {
+    transform: rotateY(0deg);
+}
+
+/* Hide class for search functionality */
+.hide {
+    display: none;
+}
