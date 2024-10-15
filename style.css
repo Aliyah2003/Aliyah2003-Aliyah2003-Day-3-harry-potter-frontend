@@ -1,126 +1,199 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
-/* General Reset */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
-body {
-    background-color: #0E5B51;
-    font-family: "Merriweather", serif;
-    font-weight: 700;
-    color: white;
-}
+/* .griffy-regular {
+    font-family: "Griffy", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  } */
 
-header {
+  *{
+    box-sizing:border-box;
+  }
 
-    padding: 1rem;
-    display: flex;
+  body{
+      background-color: #0E5B51;
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+      font-style: normal;
+      color: white;
+  }
+
+  header{
+    padding:1rem;
+    display:flex;
     align-items: center;
     justify-content: space-between;
     background-color: #8B8F8B;
+    position:relative;
     border: 2px solid;
+  }
+
+
+  header a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent element */
 }
 
-.Harry-title {
-    flex-grow: 1;
+header a:hover {
+    color: #0E5B51; /* Optional: Change color on hover */
+}
+
+  .harry-title{
     text-align: center;
+    flex-grow: 1;
+    display: inline; /* Ensure title is treated as inline for centering */
+    margin: 0; /* Remove default margin for better centering */
+  }
+  /* just add */
+  #search-box {
+    position: absolute;
+    right: 1rem;
 }
 
-.search {
+  .search{
     background-color: transparent;
     border: 2px solid;
-    border-radius: 50px;
+    padding:0.5rem 1rem;
+    border-radius:50px;
     font-size: 1rem;
-    padding: 0.5rem 1rem;
-    color: black;
+    justify-content: flex-end;
 }
 
-.search:focus {
-    outline: 0;
+.search:focus{
+    outline:0;
 }
 
-.search::placeholder {
-    color: black;
+.search::placeholder{
+    color:whitesmoke;
 }
 
-/* Main container setup */
-main {
-    margin-top: 20px; /* Adds space above the main section */
-    padding: 20px; /* Adds space inside the main section */
-    display: flex;
-    flex-wrap: wrap;
+main{
+    display:flex;
+    flex-wrap:wrap;
     justify-content: center;
+    margin-top: 2rem;
     position: relative;
     background-color: transparent;
 }
 
-/* Container for both front and back sides of the card */
-.character-container {
-    position: relative;
-    width: 300px;
-  height: 400px; /* Adjusted to ensure image fits nicely */
-    perspective: 1000px;
-    margin: 1rem;
-}
-.character img {
-    width: 100%;
-    height: 95%; /* Takes up 80% of the container height */
-    object-fit: cover; /* Ensures the image scales correctly */
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
+.character{
+    width:300px;
+    height: 400px;
+    margin:1rem;
+    backface-visibility: hidden;
+    border:1px solid;
+    border-radius:30px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,1);
 
-/* Card content */
-.character {
+}
+.character .inner {
+    position: relative;
     width: 100%;
     height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+.character:hover .inner {
+    transform: rotateY(180deg);
+}
+/* Front and Back Common Styles */
+.front, .back {
     position: absolute;
+    width: 100%;
+    height: 100%;
     backface-visibility: hidden;
-    transition: transform 1s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Front side of the card */
+
+
+/* Front of the Card */
 .front {
     background-color: #8B8F8B;
-    z-index: 2; /* Front is on top initially */
-      border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    z-index: 2;
+    padding: 1rem;
 }
 
-/* Back side of the card */
+.front img {
+    width: 100%;
+    height: 87%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.front .character-info h3 {
+    color: white;
+    margin-top: 1rem;
+}
+
+/* Back of the Card */
 .back {
     background-color: #0E5B51;
-      border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    transform: rotateY(180deg);
+    padding: 1rem;
+    text-align: center;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transform: rotateY(180deg); /* Back is hidden until flipped */
-    z-index: 1; /* Back is behind the front */
 }
 
-/* Flip effect */
-.character-container:hover .front {
+.back h1 {
+    margin-bottom: 1rem;
+}
+
+.back p {
+    margin: 0.5rem 0;
+}
+
+/* Hide Class */
+.hide {
+    display: none;}
+
+
+
+/* 
+
+.character-info{
+    color:aliceblue;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.character-info h3{
+    margin-top: 0;
+}
+
+.character img{
+    width:100%;
+    height:90%;
+}
+
+.front{
+    position:relative;
+    backface-visibility: hidden;
+    background-color: lightsalmon;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.back{
+    position: absolute;
+    backface-visibility: hidden;
+    background-color: white;
     transform: rotateY(180deg);
 }
 
-.character-container:hover .back {
-    transform: rotateY(0deg);
+.hide{
+    display:none;
 }
 
-/* Hide class for search functionality */
-.hide {
-    display: none;
-}
+
+
+   */
